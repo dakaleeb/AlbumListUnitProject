@@ -1,0 +1,55 @@
+﻿
+@model AlbumListUnitProject.Models.Album
+
+@{
+    string title = ViewBag.Action + " Album";
+    ViewData["Title"] = title;
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class="mb-2">
+    <a asp-controller="Artist" asp-action="Add">Add New Artist</a>
+</div>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="AlbumName" class="form-label">Album Name</label>
+        <input asp-for="AlbumName" class="form-control" />
+        <span asp-validation-for="AlbumName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AlbumDescription" class="form-label">Description</label>
+        <textarea asp-for="AlbumDescription" class="form-control"></textarea>
+        <span asp-validation-for="AlbumDescription" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AlbumRating" class="form-label">Rating</label>
+        <input asp-for="AlbumRating" class="form-control" />
+        <span asp-validation-for="AlbumRating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="GenreID" class="form-label">Genre</label>
+        <select asp-for="GenreID" class="form-select" asp-items="@(new SelectList(ViewBag.Genres, "GenreID", "GenreName"))">
+            <option value="">Select a genre</option>
+        </select>
+        <span asp-validation-for="GenreID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ArtistID" class="form-label">Artist</label>
+        <select asp-for="ArtistID" class="form-select" asp-items="@(new SelectList(ViewBag.Artists, "ArtistID", "ArtistName"))">
+            <option value="">Select an artist</option>
+        </select>
+        <span asp-validation-for="ArtistID" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="AlbumId" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>

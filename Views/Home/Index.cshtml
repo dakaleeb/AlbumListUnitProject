@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="mb-2">
+    <a asp-controller="Album" asp-action="Add">Add New Album</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Genre</th>
+            <th>Artist</th>
+            <th>Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var album in Model)
+        {
+            <tr>
+                <td>@album.AlbumName</td>
+                <td>@album.AlbumDescription</td>
+                <td>@album.Genre.GenreName</td>
+                <td>@album.Artist.ArtistName</td>
+                <td>@album.AlbumRating</td>
+                <td>
+                    <a asp-controller="Album" asp-action="Edit"
+                       asp-route-id="@album.AlbumId">Edit</a>
+                    <a asp-controller="Album" asp-action="Delete"
+                       asp-route-id="@album.AlbumId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
